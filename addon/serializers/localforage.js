@@ -1,8 +1,9 @@
 import DS from 'ember-data';
 
 var Serializer = DS.JSONSerializer.extend({
-  
+
   shouldSerializeHasMany(snapshot, key, relationship) {
+    console.log("Mainman");
     const relationshipType = snapshot.type.determineRelationshipType(relationship, this.store);
 
     if (this._mustSerialize(key)) {
@@ -25,7 +26,8 @@ var Serializer = DS.JSONSerializer.extend({
 if( ! DS.JSONSerializer.prototype.shouldSerializeHasMany ) {
   Serializer.reopen({
     _shouldSerializeHasMany( snapshot, key, relationship ){
-      this.shouldSerializeHasMany( snapshot, key, relationship );
+      console.log("Middleman");
+      return this.shouldSerializeHasMany( snapshot, key, relationship );
     }
   });
 }
