@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 
 var Serializer = DS.JSONSerializer.extend({
+  
   shouldSerializeHasMany(snapshot, key, relationship) {
     const relationshipType = snapshot.type.determineRelationshipType(relationship, this.store);
 
