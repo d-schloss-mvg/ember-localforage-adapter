@@ -2,7 +2,6 @@ import Ember from 'ember';
 import DS from 'ember-data';
 import LFQueue from 'ember-localforage-adapter/utils/queue';
 import LFCache from 'ember-localforage-adapter/utils/cache';
-import {uuid} from 'ember-cli-uuid';
 
 export default DS.Adapter.extend(Ember.Evented, {
 
@@ -32,7 +31,7 @@ export default DS.Adapter.extend(Ember.Evented, {
   findRecord(store, type, id) {
     return this._getNamespaceData(type).then((namespaceData) => {
       const record = namespaceData.records[id];
-
+      
       if (!record) {
         return Ember.RSVP.reject();
       }
@@ -150,14 +149,14 @@ export default DS.Adapter.extend(Ember.Evented, {
   },
 
   generateIdForRecord() {
-    return uuid();
+    return Math.random().toString(32).slice(2).substr(0, 5);
   },
 
   // private
 
   _setNamespaceData(type, namespaceData) {
     const modelNamespace = this._modelNamespace(type);
-
+    
     return this._loadData().then((storage) => {
       if (this.caching !== 'none') {
         this.cache.set(modelNamespace, namespaceData);
