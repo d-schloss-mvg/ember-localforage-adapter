@@ -1,6 +1,6 @@
 {
   "name": "ember-localforage-adapter",
-  "version": "2.2.1",
+  "version": "2.2.3",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -46,5 +46,8 @@
   "ember-addon": {
     "after": "ember-data",
     "configPath": "tests/dummy/config"
+  },
+  "publishConfig": {
+    "registry": "http://npm.monks.de/"
   }
 }
